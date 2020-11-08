@@ -11,15 +11,16 @@ export class UpdateProductDTO {
   @IsOptional()
   @IsString()
   @Length(0, 100)
-  title: string;
+  title?: string;
 
   @IsOptional()
   @IsString()
   @Length(0, 500)
-  description: string;
+  description?: string;
 
-  // TODO: Add validation
-  image: string;
+  @IsOptional()
+  @IsString()
+  image?: string;
 
   @IsOptional()
   @IsNumber({
@@ -27,7 +28,7 @@ export class UpdateProductDTO {
     allowInfinity: false,
     maxDecimalPlaces: 0,
   })
-  quantity: number;
+  quantity?: number;
 
   @IsOptional()
   @IsNumber({
@@ -35,9 +36,9 @@ export class UpdateProductDTO {
     allowInfinity: false,
     maxDecimalPlaces: 0,
   })
-  price: number;
+  price?: number;
 
   @IsOptional()
   @IsEnum(ProductStatus)
-  status: ProductStatus;
+  status?: ProductStatus;
 }

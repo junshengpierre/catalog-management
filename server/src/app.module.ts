@@ -7,6 +7,8 @@ import { ProductModule } from './product/product.module';
 import { LoggerModule } from 'nestjs-pino';
 import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
+import { join } from 'path';
+import { ServeStaticModule } from '@nestjs/serve-static';
 
 @Module({
   imports: [
@@ -21,6 +23,14 @@ import { HealthController } from './health/health.controller';
         useFindAndModify: false,
       },
     ),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'uploads'),
+      serveRoot: '/images',
+      serveStaticOptions: {
+        index: false,
+        redirect: false,
+      },
+    }),
     ProductModule,
   ],
   controllers: [AppController, HealthController],

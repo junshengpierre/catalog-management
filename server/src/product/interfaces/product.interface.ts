@@ -8,7 +8,7 @@ export enum ProductStatus {
 export interface Product extends Document {
   title: string;
   description: string;
-  image: string;
+  image?: string;
   quantity: number;
   price: number;
   status: ProductStatus;

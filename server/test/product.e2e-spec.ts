@@ -22,7 +22,6 @@ describe('ProductController (e2e)', () => {
   const product: CreateProductDTO = {
     title: 'Product Title',
     description: 'Product Description',
-    image: '',
     quantity: 10,
     price: 500,
     status: ProductStatus.Public,
@@ -42,13 +41,18 @@ describe('ProductController (e2e)', () => {
   it('should create product', () => {
     return request(app)
       .post('/product')
-      .send(product)
+      .field('title', product.title)
+      .field('description', product.description)
+      .field('quantity', product.quantity)
+      .field('price', product.price)
+      .field('status', product.status)
+      .attach('file', 'test/test-image.png')
       .expect(({ body }) => {
         expect(body._id).toBeDefined();
         productId = body._id;
         expect(body.title).toEqual(product.title);
         expect(body.description).toEqual(product.description);
-        expect(body.image).toEqual(product.image);
+        expect(body.image).toBeDefined();
         expect(body.quantity).toEqual(product.quantity);
         expect(body.price).toEqual(product.price);
         expect(body.status).toEqual(product.status);
@@ -64,7 +68,7 @@ describe('ProductController (e2e)', () => {
       .expect(({ body }) => {
         expect(body.title).toEqual(product.title);
         expect(body.description).toEqual(product.description);
-        expect(body.image).toEqual(product.image);
+        expect(body.image).toBeDefined();
         expect(body.quantity).toEqual(product.quantity);
         expect(body.price).toEqual(product.price);
         expect(body.status).toEqual(product.status);
@@ -86,7 +90,7 @@ describe('ProductController (e2e)', () => {
       .expect(({ body }) => {
         expect(body.title).toEqual(editedProduct.title);
         expect(body.description).toEqual(editedProduct.description);
-        expect(body.image).toEqual(product.image);
+        expect(body.image).toBeDefined();
         expect(body.quantity).toEqual(product.quantity);
         expect(body.price).toEqual(product.price);
         expect(body.status).toEqual(product.status);
