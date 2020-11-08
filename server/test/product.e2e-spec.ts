@@ -4,9 +4,7 @@ import * as request from 'supertest';
 import { CreateProductDTO } from '../src/product/dto/create-product.dto';
 import { ProductStatus } from '../src/product/interfaces/product.interface';
 import axios from 'axios';
-
-const app = `http://localhost:${process.env.PORT}/api`;
-const database = process.env.MONGO_URI_TEST;
+import { app, database } from './constants';
 
 describe('ProductController (e2e)', () => {
   beforeAll(async () => {

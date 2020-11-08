@@ -5,11 +5,14 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ProductModule } from './product/product.module';
 import { LoggerModule } from 'nestjs-pino';
+import { TerminusModule } from '@nestjs/terminus';
+import { HealthController } from './health/health.controller';
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
     LoggerModule.forRoot(),
+    TerminusModule,
     MongooseModule.forRoot(
       process.env.NODE_ENV === 'test'
         ? process.env.MONGO_URI_TEST
@@ -20,7 +23,7 @@ import { LoggerModule } from 'nestjs-pino';
     ),
     ProductModule,
   ],
-  controllers: [AppController],
+  controllers: [AppController, HealthController],
   providers: [AppService],
 })
 export class AppModule {}
