@@ -28,6 +28,8 @@
     ]
   },
   "dependencies": {
+    "@emotion/core": "^10.1.1",
+    "@emotion/styled": "^10.0.27",
     "bootstrap": "^4.5.3",
     "next": "latest",
     "react": "^16.13.1",
@@ -42,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "babel-jest": "^25.2.3",
+    "babel-plugin-emotion": "^10.0.33",
     "eslint": "^6.8.0",
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-react": "^7.19.0",
