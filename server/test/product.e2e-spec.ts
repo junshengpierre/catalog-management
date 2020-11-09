@@ -48,8 +48,8 @@ describe('ProductController (e2e)', () => {
       .field('status', product.status)
       .attach('file', 'test/test-image.png')
       .expect(({ body }) => {
-        expect(body._id).toBeDefined();
-        productId = body._id;
+        expect(body.id).toBeDefined();
+        productId = body.id;
         expect(body.title).toEqual(product.title);
         expect(body.description).toEqual(product.description);
         expect(body.image).toBeDefined();

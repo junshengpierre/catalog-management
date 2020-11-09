@@ -1,7 +1,7 @@
 import * as mongoose from 'mongoose';
 import { ProductStatus } from '../interfaces/product.interface';
 
-export const ProductSchema = new mongoose.Schema(
+const ProductSchema = new mongoose.Schema(
   {
     title: { required: true, type: String },
     description: String,
@@ -16,3 +16,9 @@ export const ProductSchema = new mongoose.Schema(
   },
   { timestamps: true },
 );
+
+ProductSchema.set('toJSON', {
+  virtuals: true,
+});
+
+export { ProductSchema };
