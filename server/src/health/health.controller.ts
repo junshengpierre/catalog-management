@@ -27,7 +27,7 @@ export class HealthController {
           // TODO: Downgrade to Terminus v6 or wait until config
           // to exclude paths with `setGlobalPrefix` is available.
           // Ref: https://github.com/nestjs/nest/issues/963
-          `http://localhost:${process.env.PORT}/api`,
+          `${process.env.DOMAIN_URI}/api`,
         ),
     ]);
   }

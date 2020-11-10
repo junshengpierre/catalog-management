@@ -63,7 +63,7 @@ export class ProductController {
     const newProduct = await this.productService.addProduct({
       ...createProductDTO,
       ...(file && {
-        image: `http://localhost:${process.env.PORT}/images/${file.filename}`,
+        image: `${process.env.DOMAIN_URI}/images/${file.filename}`,
       }),
     });
     return res.status(HttpStatus.CREATED).json(newProduct);
@@ -80,7 +80,7 @@ export class ProductController {
     const editedProduct = await this.productService.editProduct(productID, {
       ...updateProductDTO,
       ...(file && {
-        image: `http://localhost:${process.env.PORT}/images/${file.filename}`,
+        image: `${process.env.DOMAIN_URI}/images/${file.filename}`,
       }),
     });
     if (!editedProduct) {
