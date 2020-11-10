@@ -20,7 +20,10 @@ export class ProductService {
   }
 
   async getProducts(): Promise<Product[]> {
-    const products = await this.productModel.find().exec();
+    const products = await this.productModel
+      .find()
+      .sort({ createdAt: 'desc' })
+      .exec();
     return products;
   }
 
