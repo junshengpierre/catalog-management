@@ -101,13 +101,6 @@ const Heading = styled.h1`
   font-size: 18px;
 `
 
-// lastName: Yup.string().required(),
-// username: Yup.string().required(),
-// city: Yup.string().required(),
-// state: Yup.string().required(),
-// zip: Yup.string().required(),
-// terms: Yup.bool().required(),
-
 const AddModal = ({
   show,
   onClose,
