@@ -135,8 +135,9 @@ const AddModal = ({
           form="addProductForm"
           variant="primary"
           type="submit"
-          // disabled={isDeleting}
           onClick={() => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
+            // @ts-ignore
             formRef?.current?.submitForm()
           }}
         >
