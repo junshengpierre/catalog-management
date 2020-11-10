@@ -1,37 +1,52 @@
 import { Modal, Button } from 'react-bootstrap'
 import { useRef } from 'react'
-import { AddProductForm } from './AddProductForm'
-import { useAddProduct } from '../hooks'
+import { ProductForm } from './ProductForm'
+import { useAddProduct, useUpdateProduct } from '../hooks'
 
-export const AddProductModal = ({
+export const ProductModal = ({
   show,
   onClose,
+  formValues,
+  pid,
 }: {
   show: boolean
   onClose: () => void
+  formValues?: any
+  pid?: string
 }) => {
   const formRef = useRef()
 
-  const [addProduct, { isLoading, isError }] = useAddProduct({
-    onSuccess: onClose,
+  const [
+    addProduct,
+    { isLoading: isAdding, isError: isAddError },
+  ] = useAddProduct()
+
+  const [
+    updateProduct,
+    { isLoading: isUpdating, isError: isUpdateError },
+  ] = useUpdateProduct({
+    pid: pid as string,
   })
 
   const handleSubmit = (formData) => {
-    addProduct(formData)
+    formValues ? updateProduct(formData) : addProduct(formData)
     onClose()
   }
+
+  const isLoading = formValues ? isUpdating : isAdding
 
   return (
     <Modal size="lg" show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Add Product</Modal.Title>
+        <Modal.Title>{formValues ? 'Edit Product' : 'Add Product'}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body>
-        <AddProductForm
+        <ProductForm
           ref={formRef}
           onSubmit={handleSubmit}
-          isError={isError}
+          isError={isAddError || isUpdateError}
+          formValues={formValues}
         />
       </Modal.Body>
 
@@ -40,7 +55,6 @@ export const AddProductModal = ({
           Cancel
         </Button>
         <Button
-          form="addProductForm"
           variant="primary"
           type="submit"
           disabled={isLoading}

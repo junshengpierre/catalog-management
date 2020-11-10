@@ -1,5 +1,11 @@
 import currency from 'currency.js'
 
-export function formatDisplayPrice(value: number): string {
-  return currency(value, { symbol: '$', fromCents: true }).format()
+export function formatDisplayPrice(
+  value: number,
+  withSymbol?: boolean
+): string {
+  return currency(value, {
+    symbol: withSymbol ? '$' : '',
+    fromCents: true,
+  }).format()
 }

@@ -4,7 +4,7 @@ import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { ProductStatus } from '../types'
 import { formatStoragePrice } from '../utils'
-import { ImagePreview } from '../components'
+import { ImagePreview } from '.'
 
 const schema = Yup.object({
   title: Yup.string().min(3).max(100).required().label('Title').trim(),
@@ -30,11 +30,23 @@ const schema = Yup.object({
     }),
 })
 
-export const AddProductForm = forwardRef(
+export const ProductForm = forwardRef(
   (
-    { onSubmit, isError }: { onSubmit: (any) => void; isError: boolean },
+    {
+      onSubmit,
+      isError,
+      formValues,
+    }: { onSubmit: (any) => void; isError: boolean; formValues?: any },
     ref: any
   ) => {
+    const initialValues = {
+      title: '',
+      description: '',
+      file: null,
+      quantity: undefined,
+      status: ProductStatus.Public,
+      price: undefined,
+    }
     return (
       <Formik
         innerRef={ref}
@@ -43,14 +55,7 @@ export const AddProductForm = forwardRef(
           const castValues = schema.cast(values)
           onSubmit(castValues)
         }}
-        initialValues={{
-          title: '',
-          description: '',
-          file: null,
-          quantity: undefined,
-          status: ProductStatus.Public,
-          price: undefined,
-        }}
+        initialValues={formValues || initialValues}
       >
         {({
           handleSubmit,

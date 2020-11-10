@@ -1,7 +1,7 @@
 import {
   IsOptional,
   Length,
-  IsNumber,
+  IsNumberString,
   IsEnum,
   IsString,
 } from 'class-validator';
@@ -23,18 +23,14 @@ export class UpdateProductDTO {
   image?: string;
 
   @IsOptional()
-  @IsNumber({
-    allowNaN: false,
-    allowInfinity: false,
-    maxDecimalPlaces: 0,
+  @IsNumberString({
+    no_symbols: true,
   })
   quantity?: number;
 
   @IsOptional()
-  @IsNumber({
-    allowNaN: false,
-    allowInfinity: false,
-    maxDecimalPlaces: 0,
+  @IsNumberString({
+    no_symbols: true,
   })
   price?: number;
 

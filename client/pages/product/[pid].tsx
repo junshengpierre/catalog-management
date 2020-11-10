@@ -9,7 +9,7 @@ import {
   Table,
 } from 'react-bootstrap'
 import { useRouter } from 'next/router'
-import { MainLayout, DeleteProductModal } from '../../components'
+import { MainLayout, DeleteProductModal, ProductModal } from '../../components'
 import { formatDisplayPrice } from '../../utils'
 import { format } from 'date-fns'
 import { useState } from 'react'
@@ -34,6 +34,22 @@ const ProductDetail = () => {
 
   const handleDeleteModalClose = () => setShowDeleteModal(false)
   const handleDeleteModalShow = () => setShowDeleteModal(true)
+
+  const [showEditModal, setShowEditModal] = useState(false)
+
+  const handleEditModalClose = () => setShowEditModal(false)
+  const handleEditModalShow = () => setShowEditModal(true)
+
+  const formData = product
+    ? {
+        title: product.title,
+        description: product.description,
+        quantity: product.quantity,
+        price: formatDisplayPrice(product.price),
+        status: product.status,
+        file: null,
+      }
+    : undefined
 
   return (
     <MainLayout>
@@ -83,7 +99,7 @@ const ProductDetail = () => {
                     </tr>
                     <tr>
                       <th>Price</th>
-                      <td>{formatDisplayPrice(product.price)}</td>
+                      <td>{formatDisplayPrice(product.price, true)}</td>
                     </tr>
                     <tr>
                       <th>Status</th>
@@ -105,7 +121,12 @@ const ProductDetail = () => {
                 </Table>
 
                 <Container className="mt-4 d-flex justify-content-center justify-content-lg-start">
-                  <Button variant="info" size="lg" className="mr-2">
+                  <Button
+                    variant="info"
+                    size="lg"
+                    className="mr-2"
+                    onClick={handleEditModalShow}
+                  >
                     Edit
                   </Button>
                   <Button
@@ -121,6 +142,13 @@ const ProductDetail = () => {
           </Container>
         )}
       </Container>
+
+      <ProductModal
+        show={showEditModal}
+        onClose={handleEditModalClose}
+        formValues={formData}
+        pid={pid as string}
+      />
 
       <DeleteProductModal
         show={showDeleteModal}

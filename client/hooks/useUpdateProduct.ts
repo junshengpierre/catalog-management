@@ -1,7 +1,7 @@
 import { useMutation, useQueryCache } from 'react-query'
 import { api } from '../api'
 
-export const useAddProduct = () => {
+export const useUpdateProduct = ({ pid }: { pid: string }) => {
   const queryCache = useQueryCache()
 
   return useMutation(
@@ -15,11 +15,12 @@ export const useAddProduct = () => {
       if (formData.file) {
         bodyFormData.append('file', formData.file)
       }
-      return await api.post('/product', bodyFormData)
+      return await api.patch(`/product/${pid}`, bodyFormData)
     },
     {
       onSuccess: async () => {
         queryCache.invalidateQueries('productList')
+        queryCache.invalidateQueries('productListItem')
       },
     }
   )

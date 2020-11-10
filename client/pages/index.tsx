@@ -15,7 +15,7 @@ import Link from 'next/link'
 import { formatDisplayPrice } from '../utils'
 import { api } from '../api'
 import { useState } from 'react'
-import { AddProductModal } from '../components'
+import { ProductModal } from '../components'
 
 export const Home = (): JSX.Element => {
   const { data, isLoading, isError } = useQuery('productList', async () => {
@@ -72,7 +72,8 @@ export const Home = (): JSX.Element => {
                       <Card.Text>{`Quantity: ${product.quantity}`}</Card.Text>
                       <Container className="px-0 d-flex justify-content-between">
                         <Card.Text>{`Price: ${formatDisplayPrice(
-                          product.price
+                          product.price,
+                          true
                         )}`}</Card.Text>
                         <Card.Text>{`Status: ${product.status}`}</Card.Text>
                       </Container>
@@ -90,7 +91,7 @@ export const Home = (): JSX.Element => {
         </Container>
       </Container>
 
-      <AddProductModal show={showAddModal} onClose={handleAddModalClose} />
+      <ProductModal show={showAddModal} onClose={handleAddModalClose} />
     </MainLayout>
   )
 }

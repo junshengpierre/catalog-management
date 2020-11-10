@@ -1,5 +1,5 @@
 export { ImagePreview } from './ImagePreview'
 export { MainLayout } from './MainLayout'
-export { AddProductForm } from './AddProductForm'
-export { AddProductModal } from './AddProductModal'
+export { ProductForm } from './ProductForm'
+export { ProductModal } from './ProductModal'
 export { DeleteProductModal } from './DeleteProductModal'
