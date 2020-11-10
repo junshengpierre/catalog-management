@@ -6,7 +6,7 @@ import {
   CardColumns,
   Spinner,
 } from 'react-bootstrap'
-import { MainLayout } from '../components'
+import { MainLayout, ProductEmptyImage } from '../components'
 import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
 import isEmpty from 'lodash/isEmpty'
@@ -59,13 +59,17 @@ export const Home = (): JSX.Element => {
             </div>
           )}
 
-          {/* TODO: Fix broken grid display when number of items % 3 is 1 */}
+          {/* TODO: Implement responsive grid with fixed height */}
           {Boolean(data) && (
             <CardColumns>
               {data.map((product: Product) => {
                 return (
                   <Card key={product.id} data-testid="productListItem">
-                    <Card.Img variant="top" src={product.image} />
+                    {product.image ? (
+                      <Card.Img variant="top" src={product.image} />
+                    ) : (
+                      <ProductEmptyImage />
+                    )}
                     <Card.Body>
                       <Card.Title>{product.title}</Card.Title>
                       <Card.Text>{product.description}</Card.Text>
@@ -78,6 +82,7 @@ export const Home = (): JSX.Element => {
                         <Card.Text>{`Status: ${product.status}`}</Card.Text>
                       </Container>
                     </Card.Body>
+
                     <Card.Footer className="d-flex justify-content-end">
                       <Link href={`/product/${product.id}`}>
                         <a>View Details</a>

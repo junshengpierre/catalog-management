@@ -9,7 +9,12 @@ import {
   Table,
 } from 'react-bootstrap'
 import { useRouter } from 'next/router'
-import { MainLayout, DeleteProductModal, ProductModal } from '../../components'
+import {
+  MainLayout,
+  DeleteProductModal,
+  ProductModal,
+  ProductEmptyImage,
+} from '../../components'
 import { formatDisplayPrice } from '../../utils'
 import { format } from 'date-fns'
 import { useState } from 'react'
@@ -74,7 +79,11 @@ const ProductDetail = () => {
             <Row>
               <Col lg={4} md={12} className="">
                 <Container className="mb-4 d-flex justify-content-center justify-content-lg-start">
-                  <Image src={product.image} fluid />
+                  {product.image ? (
+                    <Image src={product.image} fluid />
+                  ) : (
+                    <ProductEmptyImage />
+                  )}
                 </Container>
               </Col>
 
