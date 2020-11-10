@@ -11,12 +11,12 @@ import { ProductStatus } from '../interfaces/product.interface';
 export class CreateProductDTO {
   @IsDefined()
   @IsString()
-  @Length(0, 100)
+  @Length(3, 100)
   title: string;
 
   @IsDefined()
   @IsString()
-  @Length(0, 500)
+  @Length(3, 500)
   description: string;
 
   @IsOptional()

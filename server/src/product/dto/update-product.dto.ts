@@ -10,12 +10,12 @@ import { ProductStatus } from '../interfaces/product.interface';
 export class UpdateProductDTO {
   @IsOptional()
   @IsString()
-  @Length(0, 100)
+  @Length(3, 100)
   title?: string;
 
   @IsOptional()
   @IsString()
-  @Length(0, 500)
+  @Length(3, 500)
   description?: string;
 
   @IsOptional()

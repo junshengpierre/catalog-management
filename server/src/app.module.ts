@@ -9,11 +9,19 @@ import { TerminusModule } from '@nestjs/terminus';
 import { HealthController } from './health/health.controller';
 import { join } from 'path';
 import { ServeStaticModule } from '@nestjs/serve-static';
+import pino = require('pino');
 
 @Module({
   imports: [
     ConfigModule.forRoot(),
-    LoggerModule.forRoot(),
+    LoggerModule.forRoot({
+      pinoHttp: {
+        logger: pino({
+          level: process.env.NODE_ENV !== 'production' ? 'debug' : 'info',
+          prettyPrint: process.env.NODE_ENV !== 'production',
+        }),
+      },
+    }),
     TerminusModule,
     MongooseModule.forRoot(
       process.env.NODE_ENV === 'test'
