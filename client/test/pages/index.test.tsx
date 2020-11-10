@@ -1,6 +1,7 @@
 import React from 'react'
-import { render, fireEvent } from '../testUtils'
+import { render, waitFor } from '../testUtils'
 import { Home } from '../../pages/index'
+import { productList } from '../../mocks/fixtures'
 
 describe('Home page', () => {
   it('matches snapshot', () => {
@@ -8,10 +9,26 @@ describe('Home page', () => {
     expect(asFragment()).toMatchSnapshot()
   })
 
-  it('clicking button triggers alert', () => {
-    const { getByText } = render(<Home />, {})
-    window.alert = jest.fn()
-    fireEvent.click(getByText('Test Button'))
-    expect(window.alert).toHaveBeenCalledWith('With typescript and Jest')
+  // TOOD: Implement failure handling tests
+  // REf: https://github.com/mswjs/msw/issues/104#issuecomment-635050088
+  it('clicking button triggers alert', async () => {
+    const { getByText, queryByText, queryAllByText, getAllByTestId } = render(
+      <Home />,
+      {}
+    )
+
+    expect(getByText('Loading...')).toBeDefined()
+    expect(getByText('Catalog Management System')).toBeDefined()
+
+    await waitFor(() =>
+      expect(getAllByTestId('productListItem').length).toEqual(2)
+    )
+
+    expect(queryByText('Loading...')).toBeNull()
+    expect(queryByText(productList[0].title)).not.toBeNull()
+    expect(queryByText(productList[0].description)).not.toBeNull()
+    expect(queryAllByText(/Quantity/)).not.toBeNull()
+    expect(queryAllByText(/Price/)).not.toBeNull()
+    expect(queryAllByText(/Status/)).not.toBeNull()
   })
 })

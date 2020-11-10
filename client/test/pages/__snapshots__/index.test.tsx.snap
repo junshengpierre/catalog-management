@@ -3,118 +3,75 @@
 exports[`Home page matches snapshot 1`] = `
 <DocumentFragment>
   <div
-    class="jsx-2250570153 container"
+    class="d-flex flex-column h-100"
   >
     <main
-      class="jsx-2250570153"
+      class="css-1122yjz"
     >
-      <h1
-        class="jsx-2250570153 title"
-      >
-        Welcome to 
-        <a
-          class="jsx-2250570153"
-          href="https://nextjs.org"
-        >
-          Next.js!
-        </a>
-      </h1>
-      <p
-        class="jsx-2250570153 description"
-      >
-        Get started by editing 
-        <code
-          class="jsx-2250570153"
-        >
-          pages/index.tsx
-        </code>
-      </p>
-      <button
-        class="jsx-2250570153"
-      >
-        Test Button
-      </button>
       <div
-        class="jsx-2250570153 grid"
+        class="bg-light px-0 container-fluid"
       >
-        <a
-          class="jsx-2250570153 card"
-          href="https://nextjs.org/docs"
+        <div
+          class="container"
         >
-          <h3
-            class="jsx-2250570153"
+          <nav
+            class="px-0 navbar navbar-expand-lg navbar-light bg-transparent"
           >
-            Documentation →
-          </h3>
-          <p
-            class="jsx-2250570153"
-          >
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-        <a
-          class="jsx-2250570153 card"
-          href="https://nextjs.org/learn"
+            <a
+              class="navbar-brand"
+              href="/"
+            >
+              Catalog Management System
+            </a>
+          </nav>
+        </div>
+      </div>
+      <div
+        class="container"
+      >
+        <div
+          class="mt-4 px-0 d-flex justify-content-between align-items-center container"
         >
-          <h3
-            class="jsx-2250570153"
+          <h1
+            class="css-lc7fha"
           >
-            Learn →
-          </h3>
-          <p
-            class="jsx-2250570153"
+            Products
+          </h1>
+          <button
+            class="btn btn-primary"
+            type="button"
           >
-            Learn about Next.js in an interactive course with quizzes!
-          </p>
-        </a>
-        <a
-          class="jsx-2250570153 card"
-          href="https://github.com/vercel/next.js/tree/master/examples"
+            Add Product
+          </button>
+        </div>
+        <div
+          class="px-0 mt-4 mb-5 container"
         >
-          <h3
-            class="jsx-2250570153"
+          <div
+            class="px-0 py-4 d-flex justify-content-center container"
           >
-            Examples →
-          </h3>
-          <p
-            class="jsx-2250570153"
-          >
-            Discover and deploy boilerplate example Next.js projects.
-          </p>
-        </a>
-        <a
-          class="jsx-2250570153 card"
-          href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        >
-          <h3
-            class="jsx-2250570153"
-          >
-            Deploy →
-          </h3>
-          <p
-            class="jsx-2250570153"
-          >
-            Instantly deploy your Next.js site to a public URL with Vercel.
-          </p>
-        </a>
+            <div
+              class="spinner-border"
+              role="status"
+            >
+              <span
+                class="sr-only"
+              >
+                Loading...
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </main>
     <footer
-      class="jsx-2250570153"
+      class="bg-dark text-white px-0 css-1e46tsl container-fluid"
     >
-      <a
-        class="jsx-2250570153"
-        href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-        rel="noopener noreferrer"
-        target="_blank"
+      <div
+        class="py-3 d-flex justify-content-center container"
       >
-        Powered by 
-        <img
-          alt="Vercel Logo"
-          class="jsx-2250570153 logo"
-          src="/vercel.svg"
-        />
-      </a>
+        2020 Catalog Management System
+      </div>
     </footer>
   </div>
 </DocumentFragment>
