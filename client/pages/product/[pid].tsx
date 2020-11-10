@@ -7,15 +7,13 @@ import {
   Col,
   Row,
   Table,
-  Modal,
 } from 'react-bootstrap'
 import { useRouter } from 'next/router'
-import { MainLayout } from '../../components/MainLayout'
-import { useQuery, useMutation, useQueryCache } from 'react-query'
-import { formatDisplayPrice } from '../../utils/formatDisplayPrice'
+import { MainLayout, DeleteProductModal } from '../../components'
+import { formatDisplayPrice } from '../../utils'
 import { format } from 'date-fns'
 import { useState } from 'react'
-import { api } from '../../api'
+import { useGetProduct, useDeleteProduct } from '../../hooks'
 
 // TODO: Fix server-side loaded page does not
 // receive query params
@@ -23,30 +21,14 @@ const ProductDetail = () => {
   const router = useRouter()
   const { pid } = router.query
 
-  const queryCache = useQueryCache()
-
-  const { data: product, isLoading, isError: isFetchError } = useQuery(
-    'productListItem',
-    async () => {
-      const { data } = await api.get(`/product/${pid}`)
-      return data
-    }
+  const { data: product, isLoading, isError: isFetchError } = useGetProduct(
+    pid as string
   )
 
   const [
     deleteProduct,
     { isError: isDeleteError, isLoading: isDeleting },
-  ] = useMutation(
-    async () => {
-      return await api.delete(`/product/${pid}`)
-    },
-    {
-      onSuccess: () => {
-        queryCache.invalidateQueries('productList')
-        router.push('/')
-      },
-    }
-  )
+  ] = useDeleteProduct(pid)
 
   const [showDeleteModal, setShowDeleteModal] = useState(false)
 
@@ -140,7 +122,7 @@ const ProductDetail = () => {
         )}
       </Container>
 
-      <DeleteModal
+      <DeleteProductModal
         show={showDeleteModal}
         onClose={handleDeleteModalClose}
         onConfirm={deleteProduct}
@@ -151,38 +133,3 @@ const ProductDetail = () => {
 }
 
 export default ProductDetail
-
-const DeleteModal = ({
-  show,
-  isDeleting,
-  onClose,
-  onConfirm,
-}: {
-  show: boolean
-  isDeleting: boolean
-  onClose: () => void
-  onConfirm: () => void
-}) => {
-  return (
-    <Modal show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Delete Product</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Are you sure you want to delete product? It will be permenantly removed.
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cancel
-        </Button>
-        <Button
-          variant="danger"
-          disabled={isDeleting}
-          onClick={isDeleting ? null : onConfirm}
-        >
-          {isDeleting ? 'Deleting...' : 'Delete'}
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  )
-}

@@ -3,10 +3,8 @@ import { forwardRef } from 'react'
 import { Formik } from 'formik'
 import * as Yup from 'yup'
 import { ProductStatus } from '../types'
-import { formatStoragePrice } from '../utils/formatStoragePrice'
-import { api } from '../api'
-import { useMutation, useQueryCache } from 'react-query'
-import { ImagePreview } from '../components/ImagePreview'
+import { formatStoragePrice } from '../utils'
+import { ImagePreview } from '../components'
 
 const schema = Yup.object({
   title: Yup.string().min(3).max(100).required().label('Title').trim(),
@@ -33,37 +31,17 @@ const schema = Yup.object({
 })
 
 export const AddProductForm = forwardRef(
-  ({ onSuccess }: { onSuccess: () => void }, ref: any) => {
-    const queryCache = useQueryCache()
-
-    const [addProduct, { isError }] = useMutation(
-      async (formData: any) => {
-        const bodyFormData = new FormData()
-        bodyFormData.append('title', formData.title)
-        bodyFormData.append('description', formData.description)
-        bodyFormData.append('quantity', formData.quantity)
-        bodyFormData.append('price', formData.price)
-        bodyFormData.append('status', formData.status)
-        if (formData.file) {
-          bodyFormData.append('file', formData.file)
-        }
-        return await api.post(`/product`, bodyFormData)
-      },
-      {
-        onSuccess: async () => {
-          queryCache.invalidateQueries('productList')
-          onSuccess()
-        },
-      }
-    )
-
+  (
+    { onSubmit, isError }: { onSubmit: (any) => void; isError: boolean },
+    ref: any
+  ) => {
     return (
       <Formik
         innerRef={ref}
         validationSchema={schema}
         onSubmit={(values) => {
           const castValues = schema.cast(values)
-          addProduct(castValues)
+          onSubmit(castValues)
         }}
         initialValues={{
           title: '',

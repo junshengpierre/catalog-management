@@ -5,18 +5,17 @@ import {
   Alert,
   CardColumns,
   Spinner,
-  Modal,
 } from 'react-bootstrap'
-import { MainLayout } from '../components/MainLayout'
+import { MainLayout } from '../components'
 import styled from '@emotion/styled'
 import { useQuery } from 'react-query'
 import isEmpty from 'lodash/isEmpty'
 import { Product } from '../types'
 import Link from 'next/link'
-import { formatDisplayPrice } from '../utils/formatDisplayPrice'
+import { formatDisplayPrice } from '../utils'
 import { api } from '../api'
-import { useState, useRef } from 'react'
-import { AddProductForm } from '../components/AddProductForm'
+import { useState } from 'react'
+import { AddProductModal } from '../components'
 
 export const Home = (): JSX.Element => {
   const { data, isLoading, isError } = useQuery('productList', async () => {
@@ -90,7 +89,8 @@ export const Home = (): JSX.Element => {
           )}
         </Container>
       </Container>
-      <AddModal show={showAddModal} onClose={handleAddModalClose} />
+
+      <AddProductModal show={showAddModal} onClose={handleAddModalClose} />
     </MainLayout>
   )
 }
@@ -100,43 +100,3 @@ export default Home
 const Heading = styled.h1`
   font-size: 18px;
 `
-
-const AddModal = ({
-  show,
-  onClose,
-}: {
-  show: boolean
-  onClose: () => void
-}) => {
-  const formRef = useRef()
-
-  return (
-    <Modal size="lg" show={show} onHide={onClose}>
-      <Modal.Header closeButton>
-        <Modal.Title>Add Product</Modal.Title>
-      </Modal.Header>
-
-      <Modal.Body>
-        <AddProductForm ref={formRef} onSuccess={onClose} />
-      </Modal.Body>
-
-      <Modal.Footer>
-        <Button variant="secondary" onClick={onClose}>
-          Cancel
-        </Button>
-        <Button
-          form="addProductForm"
-          variant="primary"
-          type="submit"
-          onClick={() => {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore
-            formRef?.current?.submitForm()
-          }}
-        >
-          Submit
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  )
-}
