@@ -34,12 +34,14 @@
     "bootstrap": "^4.5.3",
     "currency.js": "^2.0.3",
     "date-fns": "^2.16.1",
+    "formik": "^2.2.3",
     "lodash": "^4.17.20",
     "next": "latest",
     "react": "^16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-dom": "^16.13.1",
-    "react-query": "^2.26.2"
+    "react-query": "^2.26.2",
+    "yup": "^0.29.3"
   },
   "devDependencies": {
     "@testing-library/react": "^10.0.1",
@@ -47,6 +49,7 @@
     "@types/lodash": "^4.14.165",
     "@types/node": "^13.9.5",
     "@types/react": "^16.9.27",
+    "@types/yup": "^0.29.9",
     "@typescript-eslint/eslint-plugin": "^2.25.0",
     "@typescript-eslint/parser": "^2.25.0",
     "babel-jest": "^25.2.3",

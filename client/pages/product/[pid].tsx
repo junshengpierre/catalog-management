@@ -26,7 +26,7 @@ const ProductDetail = () => {
   const queryCache = useQueryCache()
 
   const { data: product, isLoading, isError: isFetchError } = useQuery(
-    'productList',
+    'productListItem',
     async () => {
       const { data } = await api.get(`/product/${pid}`)
       return data
@@ -166,19 +166,21 @@ const DeleteModal = ({
   return (
     <Modal show={show} onHide={onClose}>
       <Modal.Header closeButton>
-        <Modal.Title>Are you sure you want to delete product?</Modal.Title>
+        <Modal.Title>Delete Product</Modal.Title>
       </Modal.Header>
-      <Modal.Body>Product cannot restored when it is deleted.</Modal.Body>
+      <Modal.Body>
+        Are you sure you want to delete product? It will be permenantly removed.
+      </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" onClick={onClose}>
-          Close
+          Cancel
         </Button>
         <Button
-          variant="primary"
+          variant="danger"
           disabled={isDeleting}
           onClick={isDeleting ? null : onConfirm}
         >
-          {isDeleting ? 'Deleting...' : 'Confirm'}
+          {isDeleting ? 'Deleting...' : 'Delete'}
         </Button>
       </Modal.Footer>
     </Modal>

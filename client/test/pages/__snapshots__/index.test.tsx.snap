@@ -39,6 +39,7 @@ exports[`Home page matches snapshot 1`] = `
           </h1>
           <button
             class="btn btn-primary"
+            data-testid="addProductButton"
             type="button"
           >
             Add Product

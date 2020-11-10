@@ -9,3 +9,8 @@ export interface Product {
   createdAt: Date
   updatedAt: Date
 }
+
+export enum ProductStatus {
+  Public = 'Public',
+  Private = 'Private',
+}

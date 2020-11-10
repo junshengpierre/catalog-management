@@ -11,7 +11,7 @@ describe('Home page', () => {
 
   // TOOD: Implement failure handling tests
   // REf: https://github.com/mswjs/msw/issues/104#issuecomment-635050088
-  it('clicking button triggers alert', async () => {
+  it('should fetch and display a list of products', async () => {
     const { getByText, queryByText, queryAllByText, getAllByTestId } = render(
       <Home />,
       {}
@@ -31,4 +31,8 @@ describe('Home page', () => {
     expect(queryAllByText(/Price/)).not.toBeNull()
     expect(queryAllByText(/Status/)).not.toBeNull()
   })
+
+  // TODO: Test add product flow
+  // it('should be able to add new product', async () => {
+  // })
 })
